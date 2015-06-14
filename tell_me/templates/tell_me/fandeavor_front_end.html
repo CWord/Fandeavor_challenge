@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<style type="text/css">
+			.container {
+				font-size: 25px;
+				text-align: center;
+			}
+			.btn {
+				margin-top: 10px;
+			}
+			.head {
+				margin-top: 10%;
+			}
+			ul#result_list {
+				list-style-type: none;
+				font-size: 20px;
+				text-align: left;
+				padding-left: 0px;
+			}
+			ul#notable_list {
+				font-size: 15px;
+				text-align: left;
+			}
+			.facts {
+				margin-top: 0px;
+			}
+			.result-row {
+				margin-top: 20px;
+			}
+			#image-holder {
+				padding-right: 0px;
+			}
+			#image-holder img {
+				margin-right: 5px;
+			}
+		</style>
+		<title>Tell Me About This Person</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row head">
+				<div class="col-md-3"></div>
+				<div class="col-md-6"
+					<p>Tell Me About This Person</p>
+					<form method="POST" id="post-form">
+						{% csrf_token %}
+						<div class="col-xs-3"></div>
+						<div class="col-xs-6">
+							<input type="text" name="search_field" class="form-control" id="us">
+						</div>
+						<div class="col-xs-3"></div>
+						<div class="col-xs-12">
+							<input type="submit" class="btn btn-success" value="Tell Me"></input>
+						</div>
+						<div class="col-xs-12" id="results"></div>
+					</form>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+			<div class="row result-row">
+				<div class="col-xs-2"></div>
+				<div class="col-xs-2" id="image-holder"></div>
+				<div class="col-xs-6">
+					<ul id="result_list"></ul>
+				</div>
+				<div class="col-xs-2"></div>
+			</div>
+			<div class="row facts">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-7">
+					<ul id="notable_list"></ul>
+				</div>
+				<div class="col-xs-2"></div>
+			</div>
+		</div>
+		<script src="static/scripts/main.js"></script>
+	</body>
+</html>
