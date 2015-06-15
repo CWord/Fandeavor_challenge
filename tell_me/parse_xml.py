@@ -1,18 +1,5 @@
 import xmltodict
 
-# with open('xml_data.xml') as fd:
-#     doc = xmltodict.parse(fd)
-#   - Display the image of the person
-# 	- Some notable facts(2-3)
-# 	- Full name
-# 	- Date of birth
-# 	- Place of birth
-# 	- Date of death
-# 	- Place of death
-
-#LOOK AT DATATYPE TO ONLY SHOW PERSON RESULTS
-
-#def get_data_dict(doc):
 def get_data_dict(xml):
 	doc = xmltodict.parse(xml)
 	success = doc['queryresult']['@success']
@@ -26,8 +13,6 @@ def get_data_dict(xml):
 		notable_facts = pods[pod_map['Notable facts']]['subpod']['plaintext']
 		basic_information = pods[pod_map['Basic information']]['subpod']['plaintext']
 		image_src = str(pods[pod_map['Image']]['subpod']['img']['@src'])
-		#input_interpretation = str(pods[pod_map['Input interpretation']]['subpod']['plaintext'])
-		#print input_interpretation
 
 		temp = ""
 		notable_facts_list = []
@@ -40,7 +25,7 @@ def get_data_dict(xml):
 
 		notable_facts_list = notable_facts_list[:3]
 
-		if temp != '...':
+		if temp != '...' and len(notable_facts_list) <= 2:
 			notable_facts_list.append(temp)
 		temp_list = []
 		for item in notable_facts_list:
@@ -80,4 +65,3 @@ def get_data_dict(xml):
 	else:
 		data_dict = {'Success': success, 'Did you mean': 'No matches'}
 	return data_dict
-#get_data_dict(doc)

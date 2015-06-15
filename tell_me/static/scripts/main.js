@@ -1,28 +1,22 @@
 $(function() {
 
-
-    // Submit post on submit
     $('#post-form').on('submit', function(event){
         event.preventDefault();
-        // console.log("search done");  // sanity check
-        // console.log($('#us').val())
         run_search();
     });
 
-    // AJAX for posting
     function run_search() {
-        // console.log("run_search working") // sanity check
+        // console.log("run_search working")
         $.ajax({
-            url : "run_search/", // the endpoint
-            type : "POST", // http method
-            data : { search_value : $('#us').val() }, // data sent with the post request
-            // handle a successful response
+            url : "run_search/",
+            type : "POST",
+            data : { search_value : $('#us').val() },
+            
             success : function(json) {
                 $('#result_list').empty();
                 $('#notable_list').empty();
                 $('#image-holder').empty();
                 $('#results').empty();
-                // console.log(json); // log the returned json to the console
                 // console.log(json['Success']);
                 if (json['Success'] === 'true'){
                     key_list = ['Image source', 'full name', 'Notable facts', 'date of birth', 'place of birth', 'date of death', 'place of death']
@@ -34,7 +28,6 @@ $(function() {
                         }
                         else if (key_list[key] === 'Notable facts'){
                             for (var item in json['Notable facts']){
-                                // console.log(json['Notable facts'][item])
                                 $("#notable_list").append("<li>"+json['Notable facts'][item]+"</li>");
                             }
                             $("#notable_list").prepend("<li style='list-style-type: none; font-size: 20px;'><strong>Notable Facts:</strong></li>");
@@ -43,16 +36,12 @@ $(function() {
                             $("#result_list").append("<li><strong>"+pretty_list[key]+":</strong> "+json[key_list[key]]+"</li>");                          
                         }
                     }
-                    // $("#result_list").append("<li><strong>Notable facts:</strong></li>")
                 }
                 else {
                     $("#result_list").append("Search not found")
                 }
-
-
-                // console.log("success"); // another sanity check
             },
-            // handle a non-successful response
+
             error : function(xhr,errmsg,err) {
                 $('#result_list').empty();
                 $('#notable_list').empty();
